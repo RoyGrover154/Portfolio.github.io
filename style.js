@@ -242,3 +242,32 @@ document.addEventListener('DOMContentLoaded', function() {
     duration: 800
   });
 });
+
+// Add this to your style.js file
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const formStatus = document.getElementById('form-status');
+  formStatus.innerHTML = 'Sending message...';
+  formStatus.style.display = 'block';
+
+  fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form),
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      formStatus.innerHTML = 'Message sent successfully!';
+      formStatus.style.color = 'green';
+      form.reset();
+    } else {
+      formStatus.innerHTML = 'Error sending message. Please try again.';
+      formStatus.style.color = 'red';
+    }
+  })
+  .catch(error => {
+    formStatus.innerHTML = 'Error sending message. Please try again.';
+    formStatus.style.color = 'red';
+  });
+});
