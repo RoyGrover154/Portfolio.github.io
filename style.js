@@ -263,11 +263,11 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
       form.reset();
     } else {
       formStatus.innerHTML = 'Error sending message. Please try again.';
-      formStatus.style.color = 'red';
+      formStatus.style.color = 'green';
     }
   })
   .catch(error => {
     formStatus.innerHTML = 'Error sending message. Please try again.';
-    formStatus.style.color = 'red';
+    formStatus.style.color = 'green';
   });
 });
